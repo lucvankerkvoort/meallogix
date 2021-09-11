@@ -1,5 +1,5 @@
 import "./App.css";
-import Characters from "./Components/Characters";
+import Characters from "./Components/People";
 function App() {
   return (
     <div className="App">

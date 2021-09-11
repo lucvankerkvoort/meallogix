@@ -8,7 +8,7 @@ export const UsersProvider = (props) => {
     return await fetch("https://www.swapi.tech/api/people")
       .then((res) => res.json())
       .then((starWarsCharacters) =>
-        dispatch({ people: starWarsCharacters.results })
+        dispatch({ ...state, people: starWarsCharacters.results })
       )
       .catch((error) => console.log("error happened", error));
   };
@@ -16,7 +16,7 @@ export const UsersProvider = (props) => {
     return await fetch(`https://www.swapi.tech/api/people/${id}`)
       .then((res) => res.json())
       .then((starWarsCharacter) =>
-        dispatch({ character: starWarsCharacter.result })
+        dispatch({ ...state, character: starWarsCharacter.result })
       )
       .catch((error) => console.log("error happened", error));
   };
