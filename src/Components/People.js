@@ -1,9 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { UsersContext } from "../Context";
+import spinner from "../Assets/1484.gif";
 
 const People = () => {
   const {
-    state: { people = [] },
+    state = {},
+    state: {
+      people: { entities = [], busy },
+    },
     getPeople,
     getCharacter,
   } = useContext(UsersContext);
@@ -12,10 +16,12 @@ const People = () => {
     getPeople();
   }, []);
 
-  console.log(people);
-  return (
+  console.log("state", state);
+  return busy ? (
+    <img src={spinner} alt="spinner" />
+  ) : (
     <div>
-      {people.map((character, index) => (
+      {entities.map((character, index) => (
         <div key={index} onClick={() => getCharacter(character.uid)}>
           {character.name}
         </div>
