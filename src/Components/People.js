@@ -2,14 +2,17 @@ import React, { useContext, useEffect } from "react";
 import { UsersContext } from "../Context";
 
 const People = () => {
-  const { state, getPeople, getCharacter } = useContext(UsersContext);
-  const { people = [] } = state;
+  const {
+    state: { people = [] },
+    getPeople,
+    getCharacter,
+  } = useContext(UsersContext);
 
   useEffect(() => {
     getPeople();
   }, []);
 
-  console.log(state);
+  console.log(people);
   return (
     <div>
       {people.map((character, index) => (

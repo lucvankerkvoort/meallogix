@@ -1,9 +1,11 @@
 import "./App.css";
-import Characters from "./Components/People";
+import Character from "./Components/Character";
+import People from "./Components/People";
 function App() {
   return (
     <div className="App">
-      <Characters />
+      <People />
+      <Character />
     </div>
   );
 }
