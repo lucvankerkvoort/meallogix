@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../Context";
 import Remove from "./Remove";
 import Edit from "./Edit";
+import Add from "./Add";
 import spinner from "../Assets/1484.gif";
 
 const People = () => {
@@ -11,9 +12,11 @@ const People = () => {
     state: {
       people: { entities = [], busy },
       edit,
+      add,
     },
     getPeople,
     setEdit,
+    setAdd,
     getCharacter,
   } = useContext(UsersContext);
 
@@ -43,7 +46,9 @@ const People = () => {
           </p>
         </>
       ))}
+      <p onClick={() => setAdd(true)}>Add another person</p>
       {edit && <Edit info={characterInfo} />}
+      {add && <Add />}
     </div>
   );
 };

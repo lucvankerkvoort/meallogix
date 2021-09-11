@@ -1,50 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UsersContext } from "../Context";
 
 const Add = () => {
   const [values, setValues] = useState({});
-  const {
-    state: {
-      character: {
-        busy,
-        entities = {},
-        entities: {
-          properties: {
-            name = "",
-            height = "",
-            birth_year = "",
-            eye_color = "",
-          } = {},
-        } = {},
-      } = {},
-    },
-  } = useContext(UsersContext);
+  const { addPerson } = useContext(UsersContext);
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        addPerson();
+        addPerson(values);
       }}
     >
+      <label>Name</label>
       <input
         id="name"
-        onClick={(e) => setValues({ [e.target.id]: e.target.value })}
+        onChange={(e) => {
+          console.log("value", e.target.value);
+          setValues({ [e.target.id]: e.target.value });
+        }}
       />
-      <input
-        id="height"
-        onClick={(e) => setValues({ [e.target.id]: e.target.value })}
-      />
-      <input
-        id="birth_year"
-        onClick={(e) => setValues({ [e.target.id]: e.target.value })}
-      />
-      <input
-        id="eye_color"
-        onClick={(e) => setValues({ [e.target.id]: e.target.value })}
-      />
-      <input />
-      <input />
-      <input />
     </form>
   );
 };

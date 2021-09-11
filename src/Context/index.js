@@ -7,6 +7,7 @@ export const UsersProvider = (props) => {
     people: { entities: [], busy: false },
     character: { entities: {}, busy: false },
     edit: false,
+    add: false,
   });
   const getPeople = async () => {
     dispatch({ ...state, people: { busy: true } });
@@ -38,6 +39,10 @@ export const UsersProvider = (props) => {
     return dispatch({ ...state, edit });
   };
 
+  const setAdd = (add) => {
+    return dispatch({ ...state, add });
+  };
+
   const editPerson = ({ id, edit }) => {
     const {
       people: { entities },
@@ -66,12 +71,27 @@ export const UsersProvider = (props) => {
     return dispatch({ ...state, people: { entities: cleanedEntity } });
   };
 
-  const add = () => {
-    // push the new person into the people array, give him a uid which is the length of the array +1
+  const addPerson = ({ name }) => {
+    const {
+      people: { entities },
+    } = state;
+
+    const newEntities = entities;
+    let number = 0;
+    entities.forEach((item) => {
+      if (parseInt(item.uid) > number) {
+        number = parseInt(item.uid);
+      }
+    });
+    newEntities.push({ uid: String(number + 1), name });
+
+    return dispatch({
+      ...state,
+      people: { entities: newEntities },
+      add: false,
+    });
   };
-  const title = () => {
-    // set a new value or replace the value of the title
-  };
+
   return (
     <UsersContext.Provider
       value={{
@@ -80,8 +100,10 @@ export const UsersProvider = (props) => {
         getPeople,
         getCharacter,
         editPerson,
+        addPerson,
         removePerson,
         setEdit,
+        setAdd,
       }}
     >
       {props.children}
