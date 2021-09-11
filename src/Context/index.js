@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-
+import makeid from "../Utils/makeId";
 export const UsersContext = createContext();
 
 export const UsersProvider = (props) => {
@@ -77,13 +77,7 @@ export const UsersProvider = (props) => {
     } = state;
 
     const newEntities = entities;
-    let number = 0;
-    entities.forEach((item) => {
-      if (parseInt(item.uid) > number) {
-        number = parseInt(item.uid);
-      }
-    });
-    newEntities.push({ uid: String(number + 1), name });
+    newEntities.push({ uid: makeid(3), name });
 
     return dispatch({
       ...state,
