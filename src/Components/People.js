@@ -24,6 +24,7 @@ const People = () => {
       {entities.map((character, index) => (
         <div key={index} onClick={() => getCharacter(character.uid)}>
           {character.name}
+          
         </div>
       ))}
     </div>
